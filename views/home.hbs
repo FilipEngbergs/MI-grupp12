@@ -1,0 +1,43 @@
+{{#if loggedIn}}
+  <div class="main-container">
+    <div class="home-container">
+      {{#each restaurants}}
+        <a href="/restaurants/{{_id}}">
+          <div class="restaurant-item">
+            <div class="image-container">
+              <img src="{{imageUrl}}" alt="image" />
+            </div>
+            <div class="title-container">
+              <h2>{{name}}</h2>
+              <p>{{{showStars averageRating}}}</p>
+            </div>
+            <div class="description-container">
+              <p>{{description}}</p>
+            </div>
+          </div>
+        </a>
+      {{/each}}
+    </div>
+  </div>
+{{else}}
+  <div class="main-container">
+    <div class="home-container">
+      {{#each restaurants}}
+        <a href="/users/login">
+          <div class="restaurant-item">
+            <div class="image-container">
+              <img src="{{imageUrl}}" alt="image" />
+            </div>
+            <div class="title-container">
+              <h2>{{name}}</h2>
+              <p>{{{showStars averageRating}}}</p>
+            </div>
+            <div class="description-container">
+              <p>{{description}}</p>
+            </div>
+          </div>
+        </a>
+      {{/each}}
+    </div>
+  </div>
+{{/if}}
