@@ -8,11 +8,18 @@ router.get("/register", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-    const { email, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword, name, street, zipcode, town } =
+        req.body;
 
     const newUser = new UserModel({
         email: email,
         password: password,
+        name: name,
+        adress: {
+            street: street,
+            zipcode: zipcode,
+            town: town,
+        },
     });
     await newUser.save();
     res.redirect("/");
