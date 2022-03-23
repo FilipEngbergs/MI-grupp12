@@ -41,7 +41,8 @@ app.get("/", async (req, res) => {
 
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        res.render("userpage");
+        const userName = tokenData.name;
+        res.render("userpage", { userName });
     } else {
         res.render("home");
     }
