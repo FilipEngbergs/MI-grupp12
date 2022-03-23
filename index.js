@@ -27,7 +27,7 @@ app.use((req, res, next) => {
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
         res.locals.loggedIn = true;
-        res.locals.username = tokenData.username;
+        res.locals.username = tokenData.email;
     } else {
         res.locals.loggedIn = false;
     }
@@ -39,7 +39,7 @@ app.get("/", async (req, res) => {
 
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        res.send("still logged in as " + tokenData.username);
+        res.send("still logged in as " + tokenData.email);
     } else {
         res.render("home");
     }

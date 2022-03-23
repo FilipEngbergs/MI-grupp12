@@ -8,10 +8,10 @@ router.get("/register", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-    const { username, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword } = req.body;
 
     const newUser = new UserModel({
-        username: username,
+        email: email,
         password: password,
     });
     await newUser.save();
@@ -23,18 +23,18 @@ router.get("/login", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     UserModel.findOne(
         {
-            username,
+            email,
             password,
         },
         (e, user) => {
             if (user) {
                 const userData = {
                     _id: user._id.toString(),
-                    username,
+                    email,
                 };
                 const accessToken = jwt.sign(userData, process.env.JWTSECRET);
                 res.cookie("token", accessToken);
