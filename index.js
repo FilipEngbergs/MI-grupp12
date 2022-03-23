@@ -5,6 +5,8 @@ const exphbs = require("express-handlebars");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user-route.js");
+const cleanerRouter = require("./routes/cleaner-route.js");
+const adminRouter = require("./routes/admin-route.js");
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
+app.use("/cleaner", cleanerRouter);
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");
