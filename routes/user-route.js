@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModels.js");
 
-router.get("/register", (req, res) => {
+router.get("/register", async (req, res) => {
     res.render("register");
 });
 
@@ -41,7 +41,9 @@ router.post("/login", async (req, res) => {
 
                 res.send("logged in");
             } else {
-                res.send("wrong user");
+                const errorMessage =
+                    "Sorry! Username and password don't match.";
+                res.render("login", { errorMessage });
             }
         }
     );
