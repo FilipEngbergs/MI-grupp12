@@ -8,11 +8,18 @@ router.get("/register", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-    const { username, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword, name, street, zipcode, town } =
+        req.body;
 
     const newUser = new UserModel({
-        username: username,
+        email: email,
         password: password,
+        name: name,
+        adress: {
+            street: street,
+            zipcode: zipcode,
+            town: town,
+        },
     });
     await newUser.save();
     res.redirect("/");
@@ -23,23 +30,24 @@ router.get("/login", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     UserModel.findOne(
         {
-            username,
+            email,
             password,
         },
         (e, user) => {
             if (user) {
                 const userData = {
                     _id: user._id.toString(),
-                    username,
+                    email: user.email,
+                    name: user.name,
                 };
                 const accessToken = jwt.sign(userData, process.env.JWTSECRET);
                 res.cookie("token", accessToken);
 
-                res.send("logged in");
+                res.redirect("/");
             } else {
                 const errorMessage =
                     "Sorry! Username and password don't match.";

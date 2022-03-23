@@ -5,6 +5,8 @@ const exphbs = require("express-handlebars");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user-route.js");
+const cleanerRouter = require("./routes/cleaner-route.js");
+const adminRouter = require("./routes/admin-route.js");
 
 const app = express();
 
@@ -27,7 +29,7 @@ app.use((req, res, next) => {
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
         res.locals.loggedIn = true;
-        res.locals.username = tokenData.username;
+        res.locals.username = tokenData.email;
     } else {
         res.locals.loggedIn = false;
     }
@@ -39,13 +41,21 @@ app.get("/", async (req, res) => {
 
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        res.send("still logged in as " + tokenData.username);
+        const userName = tokenData.name;
+        res.render("userpage", { userName });
     } else {
         res.render("home");
     }
 });
 
+app.post("/logout", async (req, res) => {
+    res.cookie("token", "", { maxAge: 0 });
+    res.redirect("/");
+});
+
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
+app.use("/cleaner", cleanerRouter);
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");
