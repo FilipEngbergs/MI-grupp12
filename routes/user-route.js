@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
                 const accessToken = jwt.sign(userData, process.env.JWTSECRET);
                 res.cookie("token", accessToken);
 
-                res.send("logged in");
+                res.redirect("/");
             } else {
                 const errorMessage =
                     "Sorry! Username and password don't match.";

@@ -41,10 +41,15 @@ app.get("/", async (req, res) => {
 
     if (token && jwt.verify(token, process.env.JWTSECRET)) {
         const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        res.send("still logged in as " + tokenData.email);
+        res.render("userpage");
     } else {
         res.render("home");
     }
+});
+
+app.post("/logout", async (req, res) => {
+    res.cookie("token", "", { maxAge: 0 });
+    res.redirect("/");
 });
 
 app.use("/user", userRouter);
