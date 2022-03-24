@@ -1,20 +1,79 @@
-<h2>User page</h2>
+<section class="flex justify-center bg-green-500 py-8">
+  <h3 class="text-white text-2xl">Create booking</h3>
+</section>
 
-<h3>Hello {{userName}}</h3>
-
-<h2>Create booking:</h2>
-
-<form action="/new-booking" method="post">
-  <input type="text" name="firstname" placeholder="Firstname" /><br />
-  <input type="text" name="lastname" placeholder="Lastname" /><br />
-  <input type="text" name="street" placeholder="Street" /><br />
-  <input type="number" name="streetnumber" placeholder="Street number" /><br />
-  <input type="number" name="zipcode" placeholder="Zip-code" /><br />
-  <input type="text" name="postaladdress" placeholder="Email" /><br />
-  <input type="date" name="date" /><br />
-  <input type="time" name="time" /><br />
-  <input type="submit" value="Book cleaning" />
-</form>
+<div class="container flex flex-wrap justify-between items-center mx-auto">
+  <div class="grid grid-cols-2 py-8 gap-8">
+    <div class="flex justify-center items-center border rounded-md">
+      <p class="font-semibold">You have no schedulaed bookings</p>
+    </div>
+    <form
+      class="border border-gray-200 rounded-md p-4"
+      action="/new-booking"
+      method="post"
+    >
+      <div class="flex flex-row gap-4">
+        <div class="flex flex-col gap-4">
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="firstname"
+            placeholder="Firstname"
+          />
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="lastname"
+            placeholder="Lastname"
+          />
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="postaladdress"
+            placeholder="Email"
+          />
+        </div>
+        <div class="flex flex-col gap-4">
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="street"
+            placeholder="Street"
+          />
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="number"
+            name="streetnumber"
+            placeholder="Street number"
+          />
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="number"
+            name="zipcode"
+            placeholder="Zip-code"
+          />
+        </div>
+        <div class="flex flex-col gap-4">
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="date"
+            name="date"
+          />
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="time"
+            name="time"
+          />
+          <input
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="submit"
+            value="Book cleaning"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 <form action="/logout" method="post">
   <input type="submit" value="Logout" />
