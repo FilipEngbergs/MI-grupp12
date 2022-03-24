@@ -1,53 +1,8 @@
-{{!-- {{#if loggedIn}}
-    <div class="main-container">
-        <div class="home-container">
-            {{#each restaurants}}
-                <a href="/restaurants/{{_id}}">
-                    <div class="restaurant-item">
-                        <div class="image-container">
-                            <img src="{{imageUrl}}" alt="image" />
-                        </div>
-                        <div class="title-container">
-                            <h2>{{name}}</h2>
-                            <p>{{{showStars averageRating}}}</p>
-                        </div>
-                        <div class="description-container">
-                            <p>{{description}}</p>
-                        </div>
-                    </div>
-                </a>
-            {{/each}}
-        </div>
+<main class="bg-slate-100">
+
+  <div class="flex-col w-11/12 m-auto py-48">
+    <h2 class="text-6xl mb-4">Worlds best cleaning app is now here!</h2>
+    <p class="text-gray-700 text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, inventore? Unde reiciendis nulla quibusdam culpa vel expedita excepturi cum sequi natus amet corporis veritatis aliquid atque, mollitia totam deleniti vero!</p>
     </div>
-{{else}}
-    <div class="main-container">
-        <div class="home-container">
-            {{#each restaurants}}
-                <a href="/users/login">
-                    <div class="restaurant-item">
-                        <div class="image-container">
-                            <img src="{{imageUrl}}" alt="image" />
-                        </div>
-                        <div class="title-container">
-                            <h2>{{name}}</h2>
-                            <p>{{{showStars averageRating}}}</p>
-                        </div>
-                        <div class="description-container">
-                            <p>{{description}}</p>
-                        </div>
-                    </div>
-                </a>
-            {{/each}}
-        </div>
-    </div>
-{{/if}} --}}
-
-<h2>Cleaning inc</h2>
-
-<form action="/user/login" method="get">
-  <button>Login</button>
-</form>
-
-<form action="/user/register" method="get">
-  <button>Sign up now</button>
-</form>
+  </div>
+</main>
