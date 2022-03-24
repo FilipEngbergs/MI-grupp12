@@ -1,41 +1,55 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const BookingSchema = Schema({
-  firstname: {
-    type: String,
-    required: true,
-  },
-  lastname: {
-    type: String,
-    required: true,
+const BookingSchema = new Schema({
+  description: {
+    firstname: {
+      type: String,
+      required: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+    },
   },
   address: {
-    type: String,
-    required: true,
+    street: {
+      type: String,
+      required: true,
+    },
+    streetnumber: {
+      type: Number,
+      required: true,
+    },
+    zipcode: {
+      type: Number,
+      required: true,
+    },
+    postaladdress: {
+      type: String,
+      required: true,
+    },
   },
   date: {
     type: Date,
     default: Date.now,
   },
   time: {
-    type: Number,
+    type: String,
     required: true,
   },
   customer: {
     type: Schema.Types.ObjectId,
-    ref: "Customers",
-    required: true,
+    ref: "Users",
   },
   cleaner: {
     type: Schema.Types.ObjectId,
     ref: "Cleaners",
-    required: true,
   },
   status: {
     unconfirmed: { type: Boolean, default: false },
     confirmed: { type: Boolean, default: false },
     booked: { type: Boolean, default: false },
-    underConstruction: { type: Boolean, default: false },
+    underconstruction: { type: Boolean, default: false },
     performed: { type: Boolean, default: false },
     approved: { type: Boolean, default: false },
     invoiced: { type: Boolean, default: false },
@@ -43,4 +57,6 @@ const BookingSchema = Schema({
   },
 });
 
-module.exports = mongoose.model("Booking", BookingSchema);
+const BookingModel = model("Booking", BookingSchema);
+
+module.exports = BookingModel;
