@@ -2,6 +2,20 @@
 
 <h3>Hello {{userName}}</h3>
 
+<h2>Create booking:</h2>
+
+<form action="/new-booking" method="post">
+  <input type="text" name="firstname" placeholder="Firstname" /><br />
+  <input type="text" name="lastname" placeholder="Lastname" /><br />
+  <input type="text" name="street" placeholder="Street" /><br />
+  <input type="number" name="streetnumber" placeholder="Street number" /><br />
+  <input type="number" name="zipcode" placeholder="Zip-code" /><br />
+  <input type="text" name="postaladdress" placeholder="Email" /><br />
+  <input type="date" name="date" /><br />
+  <input type="time" name="time" /><br />
+  <input type="submit" value="Book cleaning" />
+</form>
+
 <form action="/logout" method="post">
-    <input type="submit" value="Logout" />
+  <input type="submit" value="Logout" />
 </form>
