@@ -14,43 +14,43 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.engine(
-    "hbs",
-    exphbs.engine({
-        extname: ".hbs",
-        defaultLayout: "main",
-    })
+  "hbs",
+  exphbs.engine({
+    extname: ".hbs",
+    defaultLayout: "main",
+  })
 );
 
 app.set("view engine", "hbs");
 
 app.use((req, res, next) => {
-    const { token } = req.cookies;
+  const { token } = req.cookies;
 
-    if (token && jwt.verify(token, process.env.JWTSECRET)) {
-        const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        res.locals.loggedIn = true;
-        res.locals.username = tokenData.email;
-    } else {
-        res.locals.loggedIn = false;
-    }
-    next();
+  if (token && jwt.verify(token, process.env.JWTSECRET)) {
+    const tokenData = jwt.decode(token, process.env.JWTSECRET);
+    res.locals.loggedIn = true;
+    res.locals.username = tokenData.email;
+  } else {
+    res.locals.loggedIn = false;
+  }
+  next();
 });
 
 app.get("/", async (req, res) => {
-    const { token } = req.cookies;
+  const { token } = req.cookies;
 
-    if (token && jwt.verify(token, process.env.JWTSECRET)) {
-        const tokenData = jwt.decode(token, process.env.JWTSECRET);
-        const userName = tokenData.name;
-        res.render("userpage", { userName });
-    } else {
-        res.render("home");
-    }
+  if (token && jwt.verify(token, process.env.JWTSECRET)) {
+    const tokenData = jwt.decode(token, process.env.JWTSECRET);
+    const userName = tokenData.name;
+    res.render("userpage", { userName });
+  } else {
+    res.render("home");
+  }
 });
 
 app.post("/logout", async (req, res) => {
-    res.cookie("token", "", { maxAge: 0 });
-    res.redirect("/");
+  res.cookie("token", "", { maxAge: 0 });
+  res.redirect("/");
 });
 
 app.use("/user", userRouter);
@@ -58,5 +58,5 @@ app.use("/admin", adminRouter);
 app.use("/cleaner", cleanerRouter);
 
 app.listen(3000, () => {
-    console.log("http://localhost:3000");
+  console.log("http://localhost:3000");
 });
