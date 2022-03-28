@@ -54,10 +54,13 @@ router.post("/new-booking", async (req, res) => {
 
     try {
       await newBooking.save();
-      res.send("Booking completed");
-    } catch (err) {
-      res.send("Booking not completed");
-      console.log({ message: err });
+
+      const successfulBooking = "The booking was completed!";
+      res.render("userpage", { successfulBooking });
+    } catch {
+      const validationError =
+        "You probably missed a field! Fill in all the fields above.";
+      res.render("userpage", { validationError });
     }
   } else {
     res.send("Could not find user token!");
