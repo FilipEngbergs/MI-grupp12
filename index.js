@@ -29,6 +29,10 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/cleaner", cleanerRouter);
 
+app.get("/vilkor", (req, res) => {
+  res.render("vilkor");
+});
+
 app.listen(3000, () => {
   console.log("http://localhost:3000");
 });
