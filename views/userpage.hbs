@@ -5,11 +5,18 @@
 <div class="container flex flex-wrap justify-between items-center mx-auto">
   <div class="grid grid-cols-2 py-8 gap-8">
     <div class="flex justify-center items-center border rounded-md">
-      <p class="font-semibold">You have no schedulaed bookings</p>
+      {{#if bookings}}
+        <p class="font-semibold">Bookings: </p>
+        {{#each bookings}}
+          <a href="#"><p>{{_id}}</p></a>
+        {{/each}}
+      {{else}}
+        <p class="font-semibold">You have no schedulaed bookings</p>
+      {{/if}}
     </div>
     <form
       class="border border-gray-200 rounded-md p-4"
-      action="/new-booking"
+      action="/"
       method="post"
     >
       <div class="flex flex-row gap-4">

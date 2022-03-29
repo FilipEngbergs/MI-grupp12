@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 const bookingSchema = require("../models/Booking");
+const UserModel = require("../models/UserModels");
 
 router.use((req, res, next) => {
   const { token } = req.cookies;
@@ -23,13 +24,19 @@ router.get("/", async (req, res) => {
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
     const tokenData = jwt.decode(token, process.env.JWTSECRET);
     const userName = tokenData.name;
-    res.render("userpage", { userName });
+    const userId = tokenData._id;
+
+    const userBooking = await UserModel.findById(userId).lean();
+
+    const bookings = userBooking.bookings;
+
+    res.render("userpage", { userName, bookings });
   } else {
     res.render("home");
   }
 });
 
-router.post("/new-booking", async (req, res) => {
+router.post("/", async (req, res) => {
   const { token } = req.cookies;
 
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
@@ -55,9 +62,13 @@ router.post("/new-booking", async (req, res) => {
     try {
       await newBooking.save();
 
-      const successfulBooking = "The booking was completed!";
-      res.render("userpage", { successfulBooking });
-    } catch {
+      UserModel.findById(userId, function (err, user) {
+        user.bookings.push(newBooking);
+        user.save();
+      });
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
       const validationError =
         "You probably missed a field! Fill in all the fields above.";
       res.render("userpage", { validationError });
