@@ -58,6 +58,32 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile", (req, res) => {
   const { token } = req.cookies;
+
+  if (token && jwt.verify(token, process.env.JWTSECRET)) {
+    const tokenData = jwt.decode(token, process.env.JWTSECRET);
+    const userID = tokenData._id;
+
+    res.redirect("profile/" + userID);
+  }
+});
+
+router.get("/profile/:id", (req, res) => {
+  const userId = req.params.id;
+
+  UserModel.findOne(
+    {
+      _id: userId,
+    },
+    (e, user) => {
+      const userData = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        adress: user.adress,
+      };
+      res.render("profile", { userData });
+    }
+  );
 });
 
 module.exports = router;
