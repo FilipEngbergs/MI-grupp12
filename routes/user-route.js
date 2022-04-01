@@ -57,4 +57,22 @@ router.post("/login", async (req, res) => {
   );
 });
 
+router.get("/seed-admin", async (req, res) => {
+  const newUser = new UserModel({
+    email: "admin@admin.se",
+    password: "123",
+    name: "Admin",
+    adress: {
+      street: "boulevard 123",
+      zipcode: "12345",
+      town: "Ankeborg",
+    },
+    admin: true,
+  });
+  await newUser.save();
+  console.log(newUser);
+
+  res.redirect("/");
+});
+
 module.exports = router;

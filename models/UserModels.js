@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   adress: { type: Object, required: true },
   bookings: [Bookings.schema],
+  admin: { type: Boolean, default: false },
 });
 
 const UserModel = mongoose.model("Users", userSchema);
